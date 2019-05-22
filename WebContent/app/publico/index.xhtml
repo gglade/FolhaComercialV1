@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+ <style>
+      #leftPanel {z-index:2 !important; }
+      #leftPanel div{overflow:visible;}
+   </style>
+	<title>Sistema Folha de Pagamento Comercial</title>
+	<link type="text/css" rel="stylesheet" href="dot-luv/skin.css" />
+</h:head>
+<body>
+    <p:layout fullPage="true">
+            <p:layoutUnit id="leftPanel" position="west" width="200" header="Atividades" resizable="true" closable="true" collapsible="true">
+            
+            <h:form>
+               <p:growl id="messages"/> 
+               <p:menu type="tiered" style="width:180px">  
+       
+        <p:submenu label="Cadastros" icon="ui-icon-extlink">  
+          
+          	<p:menuitem value="Usuário" url="/app/adm/usuario/form_vendafuncionario.jsf"/> 
+            <p:menuitem value="Funcionário"  url="/app/publico/funcionario/form_funcionario.jsf"/>  
+            <p:menuitem value="Empresa" url="/app/publico/empresa/form_empresa.jsf"/>
+            <p:menuitem value="Cargo" url="/app/publico/cargo/form_cargo.jsf"/>  
+            <p:menuitem value="Metas de Empresa" url="/app/publico/metaempresa/form_meta.jsf"/>
+            <p:menuitem value="Vendas de Funcionario" url="/app/publico/vendafuncionario/form_vendafunc.jsf"/>  
+        </p:submenu>
+         <p:separator />
+                  
+         <p:submenu label="Movimentos" icon="ui-icon-extlink">        
+         	<p:menuitem value="Folha de Pagamento"  url="/app/publico/folhapagamento/lista_folha.jsf" />
+         	<p:menuitem value="Eventos"  url=" " />        
+         </p:submenu>
+         <p:separator />
+         
+         <p:submenu label="Listas" icon="ui-icon-extlink">        
+         	<p:menuitem value="Funcionário"  url="/app/publico/funcionario/listagem.jsf" />
+         	<p:menuitem value="Funcionário Por Empresa"  url="/app/publico/funcionario/listagemporempresa.jsf" />  
+         	<p:menuitem value="Empresa"  url="/app/publico/empresa/listagem.jsf" />
+         	<p:menuitem value="Meta Empresa"  url="/app/publico/metaempresa/listagem.jsf" />
+         	<p:menuitem value="M.E. Por Empresa"  url="/app/publico/metaempresa/lista_me_data.jsf" />    
+         	<p:menuitem value="Total de Vendas Por Empresa"  url="/app/publico/vendafuncionario/lista_vf_empresa.jsf" />
+         	<p:menuitem value="Total de Vendas Agrupadas"  url="/app/publico/vendafuncionario/lista_vf_empresa_valorgroup.jsf" />
+         	<p:menuitem value="Listagem de Usuários" url="/app/adm/usuario/lista_usuarios.jsf"/> 
+         </p:submenu>
+         
+           
+    </p:menu>  
+            </h:form>
+            
+
+ </p:layoutUnit>
+              <h:form id="bemvindo">
+          
+            <p:layoutUnit position="center">
+            
+                <h1 align="center">Folha de Pagamento Comercial  </h1><br/>
+                <div id="box1" align="center">
+               <p:graphicImage dir="rtl" id="logo" value="//dot-luv//images//LogoEco.png"  width="640" height="227" />
+                </div>
+<!--                <h:outputLabel dir="ltr" value="Bem Vindo ao Sistema:  "/>-->
+                <h3 align="center">Bem Vindo ao Sistema: <h:outputText value="#{funcionarioBean.login}"/>
+                </h3><br/><br/><br/>
+                <div id="box1">
+			<center>
+
+				Faça o Logout <a href="#{request.contextPath}/j_spring_security_logout">clicando aqui</a>
+			</center>
+		</div>
+
+                    </p:layoutUnit>
+                    </h:form>
+        </p:layout>
+
+
+</body>
+</html>

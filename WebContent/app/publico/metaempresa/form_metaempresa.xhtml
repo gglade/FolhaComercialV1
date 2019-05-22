@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h:form>
+		<h:panelGrid columns="6" cellpadding="10">
+			<h:outputLabel value="DATA:" style="color: #045491" />
+			<h:outputText value="(Data do Dia)" />
+			<h:outputLabel value="GESTOR:" style="color: #045491" />
+			<h:outputText value="(pegar da sessao)" />
+			<h:outputLabel value="CR:" style="color: #045491" />
+			<h:outputText value="(pegar da sessao)" />
+		</h:panelGrid>
+		<h:panelGrid columns="2" cellpadding="10">
+			<h:outputLabel value="VENDAS DO DIA:" style="color: #045491" />
+			<h:inputText value="" />
+		</h:panelGrid>
+		<h:panelGrid columns="4" cellpadding="10">
+			<h:outputLabel value="VALOR DA META MENSAL 4:" style="color: #045491" />
+			<h:outputText value="(pegar do banco)" />
+			<h:outputLabel value="ACUMULADO DO MÊS R$:" style="color: #045491" />
+			<h:outputText value="(somar todos os dias do mes + esse)" />
+
+		</h:panelGrid>
+		<h:panelGrid columns="2" cellpadding="10">
+			<h:outputLabel value="VENDAS POR DIA NECESSÁRIA PARA META 4:"
+				style="color: #045491" />
+			<h:outputText
+				value="((valor acumulado - valor meta 4) / dias restantes)" />
+		</h:panelGrid>
+		<h:panelGrid columns="4" cellpadding="10">
+			<h:outputLabel value="META 1 QUINZENA:" style="color: #045491" />
+			<h:outputText value="(meta 4 / 2)" />
+			<h:outputLabel value="ACUMULADO 1 QUINZENA:" style="color: #045491" />
+			<h:outputText value="(ver)" />
+			<h:outputLabel value="META 2 QUINZENA:" style="color: #045491" />
+			<h:outputText value="(meta 4 / 2)" />
+			<h:outputLabel value="ACUMULADO 2 QUINZENA:" style="color: #045491" />
+			<h:outputText value="(ver)" />
+		</h:panelGrid>
+		<h:panelGrid columns="2" cellpadding="10">
+			<h:outputLabel value="VENDAS POR DIA NECESSÁRIA PARA 1 QUINZENA:"
+				style="color: #045491" />
+			<h:outputText
+				value="((valor acumulado 1 q. - valor 1 quinzena) / dias restantes)" />
+			<h:outputLabel value="VENDAS POR DIA NECESSÁRIA PARA 2 QUINZENA:"
+				style="color: #045491" />
+			<h:outputText
+				value="((valor acumulado 2 q. - valor 2 quinzena) / dias restantes)" />
+
+		</h:panelGrid>
+		<h:panelGrid columns="9" cellpadding="10">
+			<h:outputLabel value="META 1 QUINZENA ATINGIDA:"
+				style="color: #045491" />
+			<h:outputLabel value="1" />
+			<h:selectBooleanCheckbox value="1" />
+			<h:outputLabel value="2" />
+			<h:selectBooleanCheckbox value="2" />
+			<h:outputLabel value="3" />
+			<h:selectBooleanCheckbox value="3" />
+			<h:outputLabel value="4" />
+			<h:selectBooleanCheckbox value="4" />
+
+			<h:outputLabel value="META 2 QUINZENA ATINGIDA:"
+				style="color: #045491" />
+			<h:outputLabel value="1" />
+			<h:selectBooleanCheckbox value="1" />
+			<h:outputLabel value="2" />
+			<h:selectBooleanCheckbox value="2" />
+			<h:outputLabel value="3" />
+			<h:selectBooleanCheckbox value="3" />
+			<h:outputLabel value="4" />
+			<h:selectBooleanCheckbox value="4" />
+
+			<h:outputLabel value="META MENSAL ATINGIDA:" style="color: #045491" />
+			<h:outputLabel value="1" />
+			<h:selectBooleanCheckbox value="1" />
+			<h:outputLabel value="2" />
+			<h:selectBooleanCheckbox value="2" />
+			<h:outputLabel value="3" />
+			<h:selectBooleanCheckbox value="3" />
+			<h:outputLabel value="4" />
+			<h:selectBooleanCheckbox value="4" />
+		</h:panelGrid>
+
+		<h:panelGrid columns="2" cellpadding="10">
+			<h:outputLabel value="OCORRÊNCIAS DO DIA:" />
+			<h:inputTextarea value=" " cols="70" rows="20" />
+		</h:panelGrid>
+
+
+		<h:panelGrid>
+			<h:commandButton value="Enviar Livro" />
+		</h:panelGrid>
+
+	</h:form>
+
+</body>
+</html>

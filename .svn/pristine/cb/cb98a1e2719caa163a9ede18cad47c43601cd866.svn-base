@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+
+	<h:form id="formDados">
+
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel header="Funcionarios">
+			<h:inputHidden value="#{funcionarioBean.entidade.id}" />
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel value="Empresa: " for="empresa" />
+				<h:selectOneMenu id="empresa"
+					value="#{funcionarioBean.empresaSelecionada}" required="true"
+					requiredMessage="Selecione Uma Empresa">
+					<f:selectItem itemLabel="Selecione" itemValue="0" />
+					<f:selectItems value="#{empresaBean.empresas}" var="e" itemLabel="#{e.descricao}" itemValue="#{e.id}" />
+					<p:message for="empresa" />
+					<p:ajax update="tblFunc" process="empresa" event="change" actionListener="#{funcionarioBean.actionCarregarFuncionarios}" />
+				</h:selectOneMenu>
+				<br /><br /><br /><br />
+				<p:dataTable id="tblFunc" var="func" value="#{funcionarioBean.listCodFunc}" paginator="true" rows="10" emptyMessage="Nenhum Funcionário encontrado nessa Empresa!">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+								<h:outputText value="#{func.nome}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="CPF" />
+							</f:facet>
+								<h:outputText value="#{func.cpf}" />
+						</p:column>
+				</p:dataTable>
+								<!--					<p:commandButton value="Selecionar" update="formDados:empSel" oncomplete="dialogFunc.hide();" />  -->
+				<br />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+</body>
+</html>

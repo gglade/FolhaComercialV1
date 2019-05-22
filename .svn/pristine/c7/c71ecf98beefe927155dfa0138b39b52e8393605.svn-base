@@ -1,0 +1,18 @@
+Usando spring
+falta colocar @componente nas classes
+
+06-06-2012
+terminar de fazer as clases que herdam a interfaceDao (classes xxDaoImpl)criado
+terminar de fazer as clases que herdam a AbstractCrudBean, as Views (apresentacao) criado
+configurado o applicationContext (alterados a conexao e dominio)
+
+falta ver o arquivo web-xml
+
+2012-06-15
+feito formularios  de cadastros de:
+funcionarios;
+empresas;
+cargos;
+criado páginas de listagem de funcionarios e empresas
+testado crud de insercao e exclusao de funcionarios e empresas
+inserido menu para acesso as listagems.

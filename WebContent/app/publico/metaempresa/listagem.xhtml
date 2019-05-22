@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+
+<h:form id="formListagem">
+
+		<p:fieldset legend="Listagem de Metas">
+			<p:dataTable id="tabelaMeta" var="meta"	value="#{metaEmpresaBean.dataModel}">
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data da Meta" />
+					</f:facet>
+					<h:outputText value="#{meta.dataMeta}"> 
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				
+				 <p:column>
+                       <f:facet name="header">
+                           <h:outputText value="Empresa"/>
+                            </f:facet>
+                            <h:outputText value="#{meta.empresa.descricao}"/>
+                     </p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Valor da Meta" />
+					</f:facet>
+					<h:outputText value="#{meta.valorEmpresa}" >
+					<f:convertNumber pattern="#,###.00"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Qtde. Funcionarios" />
+					</f:facet>
+					<h:outputText value="#{meta.qtdeFuncionario}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Percentual da Meta" />
+					</f:facet>
+					<h:outputText value="#{meta.percentual}" />
+				</p:column>
+			
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Alterar" />
+					</f:facet>
+
+					<p:commandButton action="#{metaEmpresaBean.prepararAlterar()}"
+						value="Alterar" update="infosMeta"
+						oncomplete="dialogGerLivro.show()">
+						<f:ajax render="@form" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Excluir" />
+					</f:facet>
+					<h:commandLink action="#{metaEmpresaBean.excluir()}" value="Excluir"
+						immediate="true">
+						<f:ajax render="@form" />
+					</h:commandLink>
+				</p:column>
+
+			</p:dataTable>
+		</p:fieldset>
+	</h:form>
+
+	<p:dialog header="Gerencia de Meta" widgetVar="dialogGerLivro"
+		resizable="false" modal="true" showEffect="slide" width="800">
+		<h:form prependId="false">
+			<h:panelGrid id="infosMeta" columns="2" style="margin-bottom:10px">
+
+				<h:outputLabel for="datameta" value="Data da Meta:" />
+				<h:inputText id="datameta"
+					value="#{metaEmpresaBean.entidade.dataMeta}" />
+
+				<h:outputLabel for="valor" value="Valor da Meta:" />
+				<h:inputText id="valor" value="#{metaEmpresaBean.entidade.valorEmpresa}" />
+				
+				<h:outputLabel for="percentual" value="Percentual:" />
+				<h:inputText id="percentual" value="#{metaEmpresaBean.entidade.percentual}" />
+				
+				<h:outputLabel for="qtdefunc" value="Qtde. Funcionarios:" />
+				<h:inputText id="qtdefunc" value="#{metaEmpresaBean.entidade.qtdeFuncionario}" />
+				
+				<h:outputLabel value="Empresa: " for="empresa" />
+				<h:selectOneMenu id="empresa" value="#{metaEmpresaBean.entidade.empresa.id}" required="true"
+					requiredMessage="Informe Uma Empresa">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{empresaBean.empresas}" var="e"
+						itemLabel="#{e.descricao}" itemValue="#{e.id}" />
+					<p:message for="empresa" />
+				</h:selectOneMenu>				
+
+				<p:commandButton update="tabelaEmpresa,formListagem" oncomplete="dialogGerLivro.hide();" 
+				action="#{metaEmpresaBean.salvar()}" value="Inserir Meta" />
+
+				<p:commandButton update="tabelaEmpresa,formListagem" oncomplete="dialogGerLivro.hide();"
+					action="#{metaEmpresaBean.alterar()}" value="Alterar Meta" />
+
+
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+
+
+</body>
+</html>

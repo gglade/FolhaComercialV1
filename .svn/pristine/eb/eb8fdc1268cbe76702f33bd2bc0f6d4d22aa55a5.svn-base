@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+		<h:form id="form">
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel header="Funcionarios">
+			<h:inputHidden value="#{funcionarioBean.entidade.id}" />
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel value="Nome: " for="funcionario" />
+				<p:inputText value="#{funcionarioBean.entidade.nome}" size="30"
+					required="true" id="campoNome" label="Nome"
+					requiredMessage="Informe o nome do funcionario">
+					<f:validateLength minimum="10" />
+				</p:inputText>
+
+				<h:outputLabel value="CPF: " for="funcionario" />
+				<p:inputText value="#{funcionarioBean.entidade.cpf}" required="true"
+					id="campoCPF" label="CPF"
+					requiredMessage="Informe o CPF do funcionario">
+					<f:validateLength minimum="11" />
+				</p:inputText>
+
+				<h:outputLabel value="Empresa: " for="empresa" />
+				<p:selectOneMenu id="empresa" value="#{funcionarioBean.entidade.empresa.id}" required="true" requiredMessage="Informe Uma Empresa">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{empresaBean.empresas}" var="e"	itemLabel="#{e.descricao}" itemValue="#{e.id}" />
+					<p:message for="empresa" />
+				</p:selectOneMenu>
+
+				<h:outputLabel value="Cargo: " for="cargo" />
+				<p:selectOneMenu id="cargo"
+					value="#{funcionarioBean.entidade.cargo.id}" required="true"
+					requiredMessage="Informe Um Cargo">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{cargoBean.cargos}" var="c"
+						itemLabel="#{c.descricao}" itemValue="#{c.id}" />
+					<p:message for="cargo" />
+				</p:selectOneMenu>
+
+
+
+				<h:outputLabel value="Situação: " />
+				<p:selectOneMenu id="situacao"
+					value="#{funcionarioBean.entidade.situacao}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItem itemLabel="Ativo" itemValue="A" />
+					<f:selectItem itemLabel="Inativo" itemValue="I" />
+				</p:selectOneMenu> <br/>
+
+				<!--				<h:outputLabel value="Situação: " />-->
+				<!--				<p:selectOneRadio id="situacao"	value="#{empresaBean.entidade.situacao}" required="true" requiredMessage="Informe a situacao da empresa">-->
+				<!--					<f:selectItem itemLabel="Ativo" itemValue="A" />-->
+				<!--					<f:selectItem itemLabel="Inativo" itemValue="I"/>-->
+				<!--				</p:selectOneRadio>-->
+				<!--					-->
+				<h:panelGrid columns="3">
+					<p:commandButton value="Inserir Funcionario"
+						action="#{funcionarioBean.salvar()}" ajax="false" />
+					<p:commandButton value="Listar Funcionarios"
+						action="#{funcionarioBean.funcionarios}" ajax="false" />
+					<p:commandButton value="Cancelar" action="/app/publico/index" immediate="true"
+						ajax="false" />
+				</h:panelGrid>
+
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+        <h:panelGrid columns="1" id="display">  
+            <h:outputText value="Value 1: #{funcionarioBean.entidade.situacao}" /> 
+            <h:outputText value="Value 2: #{funcionarioBean.entidade.cargo.id}" />  
+            <h:outputText value="Value 3: #{funcionarioBean.entidade.empresa.id}" />     
+        </h:panelGrid>  
+    </p:dialog>  
+	</h:form>
+</body>
+</html>

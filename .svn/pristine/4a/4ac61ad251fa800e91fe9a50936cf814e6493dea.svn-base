@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+<h:form id="form">
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel header="Cargos">
+			<h:inputHidden value="#{cargoBean.entidade.id}" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Descricao: " for="cargo" />
+				<p:inputText value="#{cargoBean.entidade.descricao}"
+					required="true" id="campoDescricao" label="Descricao"
+					requiredMessage="Informe a descrição do cargo">
+					<f:validateLength minimum="3" />
+				</p:inputText>
+
+				<h:outputLabel value="Situação: " />
+ 					<p:selectOneMenu id="situacao" value="#{cargoBean.entidade.situacao}" >  
+            			<f:selectItem itemLabel="Selecione" itemValue="" />  
+            			<f:selectItem itemLabel="Ativo" itemValue="A" />  
+            			<f:selectItem itemLabel="Inativo" itemValue="I" />  
+                   </p:selectOneMenu> <br/>
+
+<!--				<h:outputLabel value="Situação: " />-->
+<!--				<p:selectOneRadio id="situacao"	value="#{empresaBean.entidade.situacao}" required="true" requiredMessage="Informe a situacao da empresa">-->
+<!--					<f:selectItem itemLabel="Ativo" itemValue="A" />-->
+<!--					<f:selectItem itemLabel="Inativo" itemValue="I"/>-->
+<!--				</p:selectOneRadio>-->
+<!--					-->
+				<h:panelGrid columns="3">	
+				<p:commandButton value="Inserir Cargo" action="#{cargoBean.salvar()}"	ajax="false" />
+				<p:commandButton value="Listar Cargos" action="#{cargoBean.cargos}"	ajax="false" />
+				<p:commandButton value="Cancelar" action="/app/publico/index" immediate="true" ajax="false" />
+				</h:panelGrid>
+				
+			</h:panelGrid>
+		</p:panel>
+		
+		  <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+        <h:panelGrid columns="1" id="display">  
+            <h:outputText value="Value 1: #{cargoBean.entidade.situacao}" />  
+               
+        </h:panelGrid>  
+    </p:dialog>  
+	</h:form>
+
+
+</body>
+</html>

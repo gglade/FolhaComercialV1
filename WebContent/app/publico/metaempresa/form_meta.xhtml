@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+		<h:form id="form">
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel header="Cadastro de Meta Empresa">
+			<h:inputHidden value="#{metaEmpresaBean.entidade.id}" />
+			
+<!--	1		DATA DA META-->
+			<h:panelGrid columns="2" cellpadding="5">			
+				<h:outputLabel value="Mês de referência: " for="campoMetaEmpresa" />
+				<p:calendar value="#{metaEmpresaBean.entidade.dataMeta}" size="10"
+					required="true" id="campoMetaEmpresa" label="metaEmpresa"
+					requiredMessage="Informe o mês de referência" showOn="button">					
+				</p:calendar>								
+			</h:panelGrid>
+					
+<!--	2		EMPRESA E QTD DE VENDEDORES-->			
+		<h:panelGrid columns="4">
+		
+				<h:outputLabel value="Empresa: " for="empresa" />
+				<p:selectOneMenu id="empresa"
+					value="#{metaEmpresaBean.entidade.empresa.id}" required="true"
+					requiredMessage="Informe Uma Empresa">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{empresaBean.empresas}" var="e"
+						itemLabel="#{e.descricao}" itemValue="#{e.id}" />
+					<p:message for="empresa" />
+				</p:selectOneMenu>
+				
+				<h:outputLabel value="Qtd. Vendedores: " for="campoqtdeFuncionario" />
+				<p:inputText value="#{metaEmpresaBean.entidade.qtdeFuncionario}"
+					required="true" id="campoqtdeFuncionario" label="qtdeFuncionario" 
+					requiredMessage="Informe a qtde. de funcionarios" size="5" dir="rtl">
+					<f:ajax render="valorVendedor valorMeta3 valorVendedor3 valorMeta2 valorVendedor2 valorMeta1 valorVendedor1" 
+					event="change" execute="campoqtdeFuncionario campoValorEmpresa" />
+					</p:inputText>
+							
+		</h:panelGrid>	<br/>	
+					
+<!--	3		VALOR DA META-->					
+			<h:panelGrid columns="4" cellpadding="5">	
+						
+				<h:outputLabel value="Meta da Loja: " for="campoValorEmpresa" />
+				<p:inputText value="#{metaEmpresaBean.entidade.valorEmpresa}" size="10"
+					required="true" id="campoValorEmpresa" label="valorEmpresa"
+					requiredMessage="Informe o valor da meta" dir="rtl">
+					<f:convertNumber pattern="#,###.00"/>
+					<f:validateDoubleRange minimum="0"/>
+					<f:ajax render="valorVendedor valorMeta3 valorVendedor3 valorMeta2 valorVendedor2 valorMeta1 valorVendedor1 valorEmpresaQuinzena1 valorVendedorQuinzena1 valorEmpresaQuinzena1_3 valorVendedorQuinzena1_3 valorEmpresaQuinzena1_2 valorVendedorQuinzena1_2 valorEmpresaQuinzena1_1 valorVendedorQuinzena1_1 valorEmpresaQuinzena2_4 valorVendedorQuinzena2_4 valorEmpresaQuinzena2_3 valorVendedorQuinzena2_3 valorEmpresaQuinzena2_2 valorVendedorQuinzena2_2 valorEmpresaQuinzena2_1 valorVendedorQuinzena2_1"
+					event="blur" execute="@this campoqtdeFuncionario percentual" />								
+				</p:inputText>				
+							
+				<h:outputLabel value="Valor do Vendedor: " for="valorVendedor" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorVendedor}" id="valorVendedor" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>				
+			</h:panelGrid>		
+					
+			<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="Valor Meta 3: " for="valorMeta3" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorEmpresa3}" id="valorMeta3" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>	
+				
+				<h:outputLabel value="Valor Vendedor 3: " for="valorVendedor3" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorVendedor3}" id="valorVendedor3" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>					
+			</h:panelGrid>
+			
+			<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="Valor Meta 2: " for="valorMeta2" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorEmpresa2}" id="valorMeta2" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>	
+				
+				<h:outputLabel value="Valor Vendedor 2: " for="valorVendedor2" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorVendedor2}" id="valorVendedor2" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>					
+			</h:panelGrid>			
+									
+			<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="Valor Meta 1: " for="valorMeta1" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorEmpresa1}" id="valorMeta1" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>	
+				
+				<h:outputLabel value="Valor Vendedor 1: " for="valorVendedor1" />
+					<h:outputText value="#{metaEmpresaBean.entidade.valorVendedor1}" id="valorVendedor1" dir="rtl">
+						<f:convertNumber pattern="#,###.00"/>
+				</h:outputText>					
+			</h:panelGrid><br/>	
+																	
+			<!--		PERCENTUAL-->
+			
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Percentual da 1 Quinzena: " for="percentual" />
+				<p:inputText value="#{metaEmpresaBean.entidade.percentual}" required="true"
+					id="percentual" label="Percentual"
+					requiredMessage="Informe o percentual para a 1 quinzena!">
+					<f:validateLength minimum="4" />
+					<f:ajax render="valorEmpresaQuinzena1 valorVendedorQuinzena1 valorEmpresaQuinzena1_3 valorVendedorQuinzena1_3 valorEmpresaQuinzena1_2 valorVendedorQuinzena1_2 valorEmpresaQuinzena1_1 valorVendedorQuinzena1_1 valorEmpresaQuinzena2_4 valorVendedorQuinzena2_4 valorEmpresaQuinzena2_3 valorVendedorQuinzena2_3 valorEmpresaQuinzena2_2 valorVendedorQuinzena2_2 valorEmpresaQuinzena2_1 valorVendedorQuinzena2_1" 
+					event="change" execute="percentual campoValorEmpresa" />
+				</p:inputText>			
+			</h:panelGrid>					
+			
+				<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="1 Quinzena Loja M4: " for="valorEmpresaQuinzena1" />
+					<h:outputText value="#{metaEmpresaBean.primeiraQuinzena}" id="valorEmpresaQuinzena1" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="1 Quinzena Vendedor M4: " for="valorVendedorQuinzena1" />
+					<h:outputText value="#{metaEmpresaBean.valorQuinzenaVendedor}" id="valorVendedorQuinzena1" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>		
+					
+		<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="1 Quinzena Loja M3: " for="valorEmpresaQuinzena1_3" />
+					<h:outputText value="#{metaEmpresaBean.primeiraQuinzena3}" id="valorEmpresaQuinzena1_3" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="1 Quinzena Vendedor M3: " for="valorVendedorQuinzena1_3" />
+					<h:outputText value="#{metaEmpresaBean.valorQuinzenaVendedor3}" id="valorVendedorQuinzena1_3" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>
+					
+			<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="1 Quinzena Loja M2: " for="valorEmpresaQuinzena1_2" />
+					<h:outputText value="#{metaEmpresaBean.primeiraQuinzena2}" id="valorEmpresaQuinzena1_2" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="1 Quinzena Vendedor M2: " for="valorVendedorQuinzena1_2" />
+					<h:outputText value="#{metaEmpresaBean.valorQuinzenaVendedor2}" id="valorVendedorQuinzena1_2" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>
+
+		<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="1 Quinzena Loja M1: " for="valorEmpresaQuinzena1_1" />
+					<h:outputText value="#{metaEmpresaBean.primeiraQuinzena1}" id="valorEmpresaQuinzena1_1" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="1 Quinzena Vendedor M1: " for="valorVendedorQuinzena1_1" />
+					<h:outputText value="#{metaEmpresaBean.valorQuinzenaVendedor1}" id="valorVendedorQuinzena1_1" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid><br/> <br/> 		
+					
+			
+		<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="2 Quinzena Loja M4: " for="valorEmpresaQuinzena2_4" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzena}" id="valorEmpresaQuinzena2_4" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="2 Quinzena Vendedor M4: " for="valorVendedorQuinzena2_4" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzenaVendedor}" id="valorVendedorQuinzena2_4" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>	
+					
+					
+				<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="2 Quinzena Loja M3: " for="valorEmpresaQuinzena2_3" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzena3}" id="valorEmpresaQuinzena2_3" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="2 Quinzena Vendedor M3: " for="valorVendedorQuinzena2_3" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzenaVendedor3}" id="valorVendedorQuinzena2_3" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>		
+			
+			<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="2 Quinzena Loja M2: " for="valorEmpresaQuinzena2_2" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzena2}" id="valorEmpresaQuinzena2_2" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="2 Quinzena Vendedor M2: " for="valorVendedorQuinzena2_2" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzenaVendedor2}" id="valorVendedorQuinzena2_2" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>					
+			
+			<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel value="2 Quinzena Loja M1: " for="valorEmpresaQuinzena2_1" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzena1}" id="valorEmpresaQuinzena2_1" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>	
+				
+				<h:outputLabel value="2 Quinzena Vendedor M1: " for="valorVendedorQuinzena2_1" />
+					<h:outputText value="#{metaEmpresaBean.segundaQuinzenaVendedor1}" id="valorVendedorQuinzena2_1" dir="rtl">
+						<f:convertNumber  pattern="#,###.00" />
+				</h:outputText>					
+			</h:panelGrid>		
+			
+					
+					
+			<h:panelGrid columns="2">		
+			
+<!--				<h:outputLabel value="CPF: " for="funcionario" />-->
+<!--				<p:inputText value="#{funcionarioBean.entidade.cpf}"-->
+<!--					required="true" id="campoCPF" label="CPF" -->
+<!--					requiredMessage="Informe o CPF do funcionario">-->
+<!--					<f:validateLength minimum="11" />-->
+<!--				</p:inputText>-->
+<!---->
+<!--				<h:outputLabel value="Empresa: " for="empresa" />-->
+<!--				<p:selectOneMenu id="empresa" value="#{metaEmpresaBean.entidade.empresa.id}" required="true"-->
+<!--					requiredMessage="Informe Uma Empresa" >-->
+<!--					<f:selectItem itemLabel="Selecione" itemValue="" />-->
+<!--					<f:selectItems value="#{empresaBean.empresas}" var="e"-->
+<!--						itemLabel="#{e.descricao}" itemValue="#{e.id}" />-->
+<!--					<p:message for="empresa" />-->
+<!--				</p:selectOneMenu>-->
+		
+				<h:panelGrid columns="3">	
+				<p:commandButton value="Inserir MetaEmpresa" action="#{metaEmpresaBean.salvar()}"	ajax="false" />
+<!--				<p:commandButton value="Listar MetaEmpresa" action="#{metaEmpresaBean.dataModel}"	ajax="false" />-->
+				<p:commandButton value="Cancelar" action="/app/publico/index" immediate="true" ajax="false" />
+				</h:panelGrid>
+				
+			</h:panelGrid>
+		</p:panel>
+		
+		  <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+        <h:panelGrid columns="1" id="display">  
+            <h:outputText value="Value 1: #{metaEmpresaBean.entidade.empresa.id}" /> 
+         </h:panelGrid>  
+    </p:dialog>  
+	</h:form>
+</body>
+</html>

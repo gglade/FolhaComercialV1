@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head></h:head> 
+<body> 
+<h:form id="formDados">
+
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel header="Folha de Pagamento">
+			<h:inputHidden  />
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel value="Empresa: " for="empresa" />
+				<h:selectOneMenu id="empresa"
+					value="#{folhaPagamentoBean.empresaSelecionada}" required="true"
+					requiredMessage="Selecione Uma Empresa">
+					<f:selectItem itemLabel="Selecione" itemValue="0" />
+					<f:selectItems value="#{empresaBean.empresas}" var="e" itemLabel="#{e.descricao}" itemValue="#{e.id}" />
+					<p:message for="empresa" />
+
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Data Competência: " for="dataCompetencia" />
+   				<p:calendar  id="dataCompetencia" value="#{folhaPagamentoBean.mesCompetencia}" /> 
+   				
+   				</h:panelGrid> 										
+				
+				<p:separator/>
+				<p:commandButton update="tblFolhaPagamento" id="submitButton" value="Gerar Folha de Pagamento" ajax="false">
+				</p:commandButton>				
+				<p:commandButton value="Voltar" action="/app/publico/index" immediate="true" ajax="false"/>
+				
+	</p:panel>			
+	</h:form>
+			<h:form id="lista">	
+				<p:dataTable id="tblFolhaPagamento" var="ev" value="#{folhaPagamentoBean.dataModelEvento}" paginator="true" rows="10" emptyMessage="Nenhum Funcionário encontrado nessa Empresa!">
+									
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Funcionário" />
+							</f:facet>
+								<h:outputText value="#{ev.funcionario.nome}" />
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="1ª Comissão" />
+							</f:facet>
+								<h:outputText value="#{ev.valorComissao1q}"  />
+						</p:column>
+								
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="2ª Comissão" />
+							</f:facet>
+								<h:outputText  value="#{ev.valorComissao2q}"/>
+						</p:column>			
+															
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Quinquenio" />
+							</f:facet>
+								<p:inputText value="#{ev.quinquenio}" size="10" id="quinquenio"
+								label="quinquenio">
+								</p:inputText>								
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Sal. Fam." />
+							</f:facet>
+								<p:inputText value="#{ev.salarioFamilia}" size="10" id="salariofamilia"
+								label="salariofamilia">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Sal." />
+							</f:facet>
+								<p:inputText value="#{ev.salario}" size="10" id="salario"
+								label="salario">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Complemento" />
+							</f:facet>
+								<p:inputText value="#{ev.complemento}" size="10" id="complemento"
+								label="complemento">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="H. Extra" />
+							</f:facet>
+								<p:inputText value="#{ev.horasExtras}" size="10" id="horasextras"
+								label="horasextras">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Dif. Ret." />
+							</f:facet>
+								<p:inputText value="#{ev.diferencaRetroativo}" size="10" id="diferencaretroativo"
+								label="diferencaretroativo">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Rend. Eventual" />
+							</f:facet>
+								<p:inputText value="#{ev.rendimentoEventual}" size="10" id="rendimentoeventual"
+								label="rendimentoeventual">
+								</p:inputText>
+						</p:column>						
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Adiantamento" />
+							</f:facet>
+								<p:inputText value="#{ev.adiantamento}" size="10" id="adiantamento"
+								label="adiantamento">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Vale Transp." />
+							</f:facet>
+								<p:inputText value="#{ev.valeTransporte}" size="10" id="valetransporte"
+								label="valetransporte">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Inss" />
+							</f:facet>
+								<p:inputText value="#{ev.inss}" size="10" id="inss"
+								label="inss">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Irrf" />
+							</f:facet>
+								<p:inputText value="#{ev.irrf}" size="10" id="irrf"
+								label="irrf">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Sindicato" />
+							</f:facet>
+								<p:inputText value="#{ev.sindicato}" size="10" id="sindicato"
+								label="sindicato">
+								</p:inputText>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Desc. Eventual" />
+							</f:facet>
+								<p:inputText value="#{ev.descontoEventual}" size="10" id="descontoeventual"
+								label="descontoeventual">
+								</p:inputText>
+						</p:column>
+						
+				</p:dataTable>				
+				<br />
+				<p:separator/>
+			<h:panelGrid columns="4">
+					<p:commandButton value="Registrar Folha de Pagamento"
+						action="#{folhaPagamentoBean.salvarFolhaPagamento()}" ajax="false" />
+					
+					<p:commandButton value="Cancelar" action="/app/publico/index" immediate="true"
+						ajax="false" />
+						
+						<p:commandButton value="Listar" action="/app/publico/vendafuncionario/lista_vf_empresa" immediate="true"
+						ajax="false" />
+				</h:panelGrid>
+			
+	
+</h:form>
+</body> 
+</html>

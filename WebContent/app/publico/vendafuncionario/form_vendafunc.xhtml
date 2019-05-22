@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h:form id="formVenda">
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel header="Cadastro de Vendas">
+			<h:inputHidden value="#{vendaFuncionarioBean.entidade.id}" />
+			<h:panelGrid columns="2" cellpadding="5">				
+
+			<h:panelGrid columns="2" cellpadding="5">	
+				<h:outputLabel value="Empresa: " for="empresa" />
+				<h:selectOneMenu id="empresa"
+					value="#{vendaFuncionarioBean.empresaSelecionada}" required="true"
+					requiredMessage="Selecione Uma Empresa">
+					<f:selectItem itemLabel="Selecione" itemValue="0" />
+					<f:selectItems value="#{empresaBean.empresas}" var="e"
+						itemLabel="#{e.descricao}" itemValue="#{e.id}" />
+					<p:message for="empresa" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Data Da Venda " for="campoDataVenda" />
+				<p:calendar value="#{vendaFuncionarioBean.dataVenda}" size="10"
+					required="true" id="campoDataVenda" label="campoDataVenda"
+					requiredMessage="Informe a Data da Venda!" >					
+				</p:calendar>
+				
+				<p:commandButton update="tblFunc" id="submitButton" value="Gerar Formulário"	
+             	action="#{vendaFuncionarioBean.actionCarregarFuncionarios}" ajax="false">
+             	</p:commandButton>
+             	</h:panelGrid>
+            	<br/>
+             	<br/>
+             	<br/>              					
+				
+			
+			<h:form id="listagem">
+			
+				<p:fieldset legend="Funcionários">
+					
+					<p:dataTable id="tblFunc" var="func"
+						value="#{vendaFuncionarioBean.dataModelVenda}" paginator="true" rows="10"
+						emptyMessage="Nenhum Funcionário encontrado nessa Empresa!">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="ID" />
+							</f:facet>
+							<h:outputText value="#{func.id}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{func.funcionario.nome}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Empresa" />
+							</f:facet>
+							<h:outputText value="#{func.empresa.descricao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Valor" />
+							</f:facet>
+							<p:inputText value="#{func.valorTotalVenda}" size="10" required="true" id="valorvendedor"
+								label="valorvendedor" requiredMessage="Informe o valor do vendedor">
+							</p:inputText>
+						</p:column>									
+						
+					</p:dataTable>
+					
+				</p:fieldset>
+				</h:form>
+				<!--				<h:outputLabel value="Valor da Venda: " for="valorvenda"/>-->
+				<!--				<p:inputText value="#{vendaFuncionarioBean.entidade.valorTotalVenda}" size="10"-->
+				<!--					required="true" id="valorvenda" label="valorvenda"-->
+				<!--					requiredMessage="Informe o valor da venda" dir="rtl">-->
+				<!--					<f:convertNumber pattern="#,###.00"/>-->
+				<!--					<f:validateDoubleRange minimum="0"/>-->
+				<!--				</p:inputText> <br/>-->
+
+				<h:panelGrid columns="4">
+					<p:commandButton value="Inserir Venda Funcionario"
+						action="#{vendaFuncionarioBean.salvarVendaFuncionario()}" ajax="false" />
+					<p:commandButton value="Listar Vendas"
+						action="#{vendaFuncionarioBean.vendaFuncionarios}" ajax="false" />
+					<p:commandButton value="Cancelar" action="/app/publico/index" immediate="true"
+						ajax="false" />
+						
+						<p:commandButton value="Listar" action="/app/publico/vendafuncionario/lista_vf_empresa" immediate="true"
+						ajax="false" />
+				</h:panelGrid>
+
+			</h:panelGrid>
+			
+		</p:panel>
+
+		<p:dialog header="Selected Values" modal="true" showEffect="fade"
+			hideEffect="fade" widgetVar="dlg">
+			<h:panelGrid columns="1" id="display">
+				<h:outputText
+					value="Value 1: #{vendaFuncionarioBean.entidade.empresa.id}" />
+			</h:panelGrid>
+		</p:dialog>
+
+	</h:form>
+</body>
+</html>
